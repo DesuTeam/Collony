@@ -14,7 +14,7 @@ public class Launcher
 		cfg.useGL30 = false;
 		cfg.title = "Collony";
 		cfg.resizable = false;
-		new LwjglApplication(null,cfg);
+		new LwjglApplication(new Game(),cfg);
 		
 	}
 }
