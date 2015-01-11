@@ -1,6 +1,6 @@
 
 public class asas {
 public static void name() {
-	System.out.println(123);
+	System.out.println(12345);
 }
 }
