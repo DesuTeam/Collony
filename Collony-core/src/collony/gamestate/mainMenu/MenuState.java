@@ -8,6 +8,7 @@ public class MenuState extends GameState{
 	public MenuState(GameStateManager gsm)
 	{
 		super(gsm);
+		init();
 	}
 
 	@Override
@@ -17,7 +18,7 @@ public class MenuState extends GameState{
 	}
 
 	@Override
-	public void update()
+	public void update(float dt)
 	{
 		
 	}
