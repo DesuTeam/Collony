@@ -1,14 +1,17 @@
 package collony.main;
 
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
 
 public class Game implements ApplicationListener{
 
-	
+	public static int WIDTH;
+	public static int HEIGHT;
 	
 	@Override
 	public void create() {
-		// TODO Auto-generated method stub
+		WIDTH = Gdx.graphics.getWidth();
+		HEIGHT = Gdx.graphics.getHeight();
 		
 	}
 
