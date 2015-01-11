@@ -5,5 +5,6 @@ public static void name() {
 	/*1234*/
 	System.out.println(145);
 	System.out.println(12345);
+	System.out.println(12345);
 }
 }
