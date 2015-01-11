@@ -26,13 +26,13 @@ public class SoundBox
 		sounds.put(key, sound);
 	}
 	
-	public void play(String key)
+	public static void play(String key)
 	{
 		if(!sounds.containsKey(key))
 			throw new IllegalArgumentException("Key \""+ key +"\" not found!");
 		sounds.get(key).play();
 	}
-	public void stop(String key)
+	public static void stop(String key)
 	{
 		if(!sounds.containsKey(key))
 			throw new IllegalArgumentException("Key \""+ key +"\" not found!");
