@@ -36,8 +36,10 @@ public class Game implements ApplicationListener
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		
 		gsm.update(Gdx.graphics.getDeltaTime());
 		gsm.render();
+		GIP.update();
 	}
 
 	@Override

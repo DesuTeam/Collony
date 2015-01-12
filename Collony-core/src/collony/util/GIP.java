@@ -2,6 +2,7 @@ package collony.util;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import com.badlogic.gdx.InputProcessor;
 
@@ -14,13 +15,15 @@ public class GIP implements InputProcessor
 	
 	public static int mousex;
 	public static int mouseY;
-	private static Map<Integer,Void> preccedKeys = new HashMap<Integer, Void>();
+	private static Map<Integer,Boolean> preccedKeys = 
+			new HashMap<Integer, Boolean>();//int -keycode , boolean - just pressed
+	
 	
 	
 	@Override
 	public boolean keyDown(int keycode) 
 	{
-		preccedKeys.put(keycode, null);
+		preccedKeys.put(keycode, true);
 		return true;
 	}
 
@@ -67,7 +70,18 @@ public class GIP implements InputProcessor
 		return false;
 	}
 	
+	public static void update()
+	{
+		Set<Integer>codes = preccedKeys.keySet();
+		for(int code : codes)
+			preccedKeys.replace(code, false);
+	}
+	
 	public static boolean isPressed(int key)
+	{
+		return isDown(key) && preccedKeys.get(key);
+	}
+	public static boolean isDown(int key)
 	{
 		return preccedKeys.containsKey(key);
 	}

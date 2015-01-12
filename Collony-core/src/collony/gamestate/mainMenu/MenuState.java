@@ -63,17 +63,13 @@ public class MenuState extends GameState
 		{
 			currentItem--;
 			if(currentItem < 0)
-			{
 				currentItem = menuItems.length - 1;
-			}
 		}
 		if(GIP.isPressed(Input.Keys.DOWN))
 		{
 			currentItem++;
 			if(currentItem > menuItems.length - 1)
-			{
 				currentItem = 0;
-			}
 		}
 		if(GIP.isPressed(Input.Keys.ENTER))
 		{
