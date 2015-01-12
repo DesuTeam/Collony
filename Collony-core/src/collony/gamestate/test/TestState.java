@@ -3,18 +3,18 @@ package collony.gamestate.test;
 import com.badlogic.gdx.Gdx;
 
 import collony.gamestate.*;
-import collony.tileMap.TileMap;
+import collony.tileMap.OrthogonalTileMap;
 
 public class TestState extends GameState
 {
 	
-	private TileMap tileMap;
+	private OrthogonalTileMap tileMap;
 	
 	public TestState(GameStateManager gsm)
 	{
 		super(gsm);
 		init();
-		tileMap = new TileMap(Gdx.files.internal("maps/map1/map.tmx"));
+		tileMap = new OrthogonalTileMap(Gdx.files.internal("maps/map1/map.tmx"));
 	}
 
 	@Override
