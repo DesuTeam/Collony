@@ -57,7 +57,7 @@ public class MenuState extends GameState
 	}
 
 	@Override
-	public void update(float dt)
+	public void handlInput() 
 	{
 		if(GIP.isPressed(Input.Keys.UP))
 		{
@@ -86,6 +86,12 @@ public class MenuState extends GameState
 				break;
 			}
 		}	
+	}
+	
+	@Override
+	public void update(float dt)
+	{
+		handlInput();
 	}
 
 	@Override
@@ -118,4 +124,6 @@ public class MenuState extends GameState
 		titleFont.dispose();
 		font.dispose();
 	}
+
+	
 }

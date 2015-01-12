@@ -13,5 +13,6 @@ public abstract class GameState
 	public abstract void init();
 	public abstract void update(float dt);
 	public abstract void render();
+	public abstract void handlInput();
 	public abstract void dispose();
 }

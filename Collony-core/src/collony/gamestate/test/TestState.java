@@ -41,4 +41,10 @@ public class TestState extends GameState
 		tileMap.dispose();	
 	}
 
+	@Override
+	public void handlInput() 
+	{
+				
+	}
+
 }
