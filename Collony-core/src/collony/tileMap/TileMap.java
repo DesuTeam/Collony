@@ -36,8 +36,13 @@ public class TileMap
 		tileMap = new 
 				com.badlogic.gdx.maps.tiled.
 				TmxMapLoader().load(txmFile.path());
+		
 		renderer = new OrthogonalTiledMapRenderer(tileMap,0.9F);
+		
 		camera = new OrthographicCamera(Game.WIDTH, Game.HEIGHT);
+		camera.setToOrtho(false, Game.WIDTH, Game.HEIGHT);
+		camera.update();
+		
 		renderer.setView(camera);
 	}
 	

@@ -26,7 +26,7 @@ public class GameStateManager
 		states.put(STATES.MENU, new MenuState(this));
 		states.put(STATES.TEST, new TestState(this));
 		
-		setState(STATES.TEST);
+		setState(STATES.MENU);
 	}
 	
 	public void setState(STATES state)
