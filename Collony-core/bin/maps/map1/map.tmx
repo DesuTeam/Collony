@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
+  <image source="grass-tiles-2-small.png" width="384" height="192"/>
+ </tileset>
+ <layer name="Слой тайлов 1" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzVlMsOgjAQRVuNFtSFCr7dCv7/F3pJOsnkOm3RyMLFCaV0Tu80pN455xV3EEAFarCK7zdaN5YnaEALDuAYfX2hbgsexrzk44ypfOLZx72HuTXYkI8z9oZDPEExfD+Bs+o3GEi+Tjl0fhlbPSyN9TvKYp1xcO9n0VFdReMm4VqAK7l4f6lLObRnnsnEvaayaI/AveWyCLl/MXW+tcpyiVnkyZksn+5Rn02utuTjPJ+6/IheZl84S0zh/Ff03fQL9N00BS8hwQuu
+  </data>
+ </layer>
+</map>

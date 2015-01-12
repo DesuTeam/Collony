@@ -1,14 +1,20 @@
 package collony.gamestate.test;
 
+import com.badlogic.gdx.Gdx;
+
 import collony.gamestate.*;
+import collony.tileMap.TileMap;
 
 public class TestState extends GameState
 {
+	
+	private TileMap tileMap;
 	
 	public TestState(GameStateManager gsm)
 	{
 		super(gsm);
 		init();
+		tileMap = new TileMap(Gdx.files.internal("maps/map1/map.tmx"));
 	}
 
 	@Override
@@ -20,19 +26,19 @@ public class TestState extends GameState
 	@Override
 	public void update(float dt)
 	{
-		System.out.println("TEST UPDATE");
+		tileMap.update(dt);
 	}
 
 	@Override
 	public void render()
 	{
-		System.out.println("TEST RENDER");
+		tileMap.render();
 	}
 
 	@Override
 	public void dispose() 
 	{
-			
+		tileMap.dispose();	
 	}
 
 }

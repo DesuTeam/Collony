@@ -5,117 +5,73 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
+import collony.main.Game;
+import collony.util.GIP;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 public class TileMap 
 {
 	
-	/*
-	 * Blocks ID's
-	 * 
-	 * 0 - Ground
-	 * 1 - Stone (Block)
-	 */
+	private TiledMap tileMap;
+	private OrthogonalTiledMapRenderer renderer;
+	private OrthographicCamera camera;
 	
-	public enum Block
-	{
-		GROUND(0 , false, "Ground"),
-		STONE(1 , true, "Stone"),
-		;
-		public final int id;
-		public final boolean isBlock;
-		public final String name;
-		
-		private Block(int id , boolean isBlock , String name) 
-		{
-			this.id = id;
-			this.isBlock = isBlock;
-			this.name = name;
-		}
-		public static Block getBlock(int id)
-		{
-			for(Block b : Block.values())
-				if(b.id == id)
-					return b;
-			return null;
-		}
-	}
-	
-	private static boolean textureLoaded;
-	private static Map<Block, Texture>textures;
-	
-	private Block[][] map;
-	
-	private int tileSize;
 	private int offsetX;//[Pixels]
 	private int offsetY;//[Pixels]
-	private int width;//[Tiles]
-	private int height;//[Tiles]
+	private int width;//  [Tiles]
+	private int height;// [Tiles]
 	
 	
-	public TileMap(FileHandle mapFile , int tileSize) 
+	public TileMap(FileHandle txmFile) 
 	{
-		load(mapFile);
-		this.tileSize = tileSize;
-		offsetX = 0;
-		offsetY = 0;
+		tileMap = new 
+				com.badlogic.gdx.maps.tiled.
+				TmxMapLoader().load(txmFile.path());
+		renderer = new OrthogonalTiledMapRenderer(tileMap,0.9F);
+		camera = new OrthographicCamera(Game.WIDTH, Game.HEIGHT);
+		renderer.setView(camera);
 	}
 	
-	private boolean load(FileHandle file)
-	{
-		try 
-		{
-		    BufferedReader r = file.reader(1024);
-			width = Integer.parseInt(r.readLine());
-			height = Integer.parseInt(r.readLine());
-			
-			String[] indexs;
-			for(int y = 0;y < height;y++)
-			{
-				indexs = r.readLine().split(" ");
-				for(int x = 0;x < width;x++)
-					map[x][y] = Block.getBlock(Integer.parseInt(indexs[x]));
-			}
-			
-			return true;
-		} catch (NumberFormatException | IOException e) 
-		{
-			e.printStackTrace();
-			return false;
-		}
-	}
 	
+		
 	public void update(float dt)
 	{
-		
-	}
-	public void render(SpriteBatch sb)
-	{
-		sb.begin();
-		for(int x = 0;x < width;x++)
-			for(int y = 0;y < height;y++)
-				sb.draw(textures.get(map[x][y]) ,x * tileSize - offsetX , y * tileSize - offsetY , tileSize , tileSize);
-		sb.end();
-	}
-	
-	public static void loadTextures()
-	{
-		if(textureLoaded)
-			return;
-	
-	}
-	public static void disposeTextures()
-	{
-		if(!textureLoaded)
-			return;
-		Set<Block>keys = textures.keySet();
-		for(Block b : keys)
+		if(GIP.isPressed(Input.Keys.W))
 		{
-			textures.get(b).dispose();
-			textures.remove(b);
+			camera.position.y+=2;
 		}
-		
+		if(GIP.isPressed(Input.Keys.S))
+		{
+			camera.position.y-=2;
+		}
+		if(GIP.isPressed(Input.Keys.A))
+		{
+			camera.position.x-=2;
+		}
+		if(GIP.isPressed(Input.Keys.D))
+		{
+			camera.position.x+=2;
+		}
+		camera.update();
+		renderer.setView(camera);
+	}
+	public void render()
+	{
+		renderer.render();
+	}
+	
+	public void dispose()
+	{
+		renderer.dispose();
+		tileMap.dispose();
 	}
 }

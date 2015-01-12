@@ -1,6 +1,7 @@
 package collony.main;
 
 import collony.gamestate.GameStateManager;
+import collony.util.GIP;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -20,6 +21,7 @@ public class Game implements ApplicationListener
 		HEIGHT = Gdx.graphics.getHeight();
 		
 		gsm = new GameStateManager();
+		Gdx.input.setInputProcessor(new GIP());
 	}
 
 	@Override

@@ -26,24 +26,24 @@ public class GameStateManager
 		states.put(STATES.MENU, new MenuState(this));
 		states.put(STATES.TEST, new TestState(this));
 		
-		setState(STATES.TEST.ordinal());
+		setState(STATES.TEST);
 	}
 	
-	public void setState(int key)
+	public void setState(STATES state)
 	{
 		if (gameState != null)
 			gameState.dispose();
 		
-		if(key == STATES.MENU.ordinal())
+		if(state == STATES.MENU)
 		{
 			gameState = states.get(STATES.MENU);
 		}
 		
-		if(key == STATES.PLAY.ordinal())
+		if(state == STATES.PLAY)
 		{
 			//gameState = states.get(STATES.PLAY);
 		}
-		if(key == STATES.TEST.ordinal())
+		if(state == STATES.TEST)
 		{
 			gameState = states.get(STATES.TEST);
 		}
