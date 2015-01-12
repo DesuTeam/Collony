@@ -31,10 +31,13 @@ public abstract class GameObject
 	// Collision box
 	protected float collusionWidth;
 	protected float collusionHeight;
-	
+
 	//Velocity
 	protected float dx;
 	protected float dy;
+	//Acceleration
+	protected float ddx;
+	protected float ddy;
 	//position in tiles
 	protected int currentRow;
 	protected int currentColl;
@@ -63,17 +66,28 @@ public abstract class GameObject
 	public abstract void render(SpriteBatch sb);
 	public void update(float dt)
 	{
+		dx += ddx * dt;
+		dy += ddy * dt;
+		if(dx > maxSpeed)
+			dx = maxSpeed;
+		else if(dx < -maxSpeed)
+			dx = -maxSpeed;
+		if(dy > maxSpeed)
+			dy = maxSpeed;
+		else if(dy < -maxSpeed)
+			dy = -maxSpeed;
+		
+		
+		nextX = x + dx * dt;
+		nextY = y + dy * dt;
 		checkTileMapCollision();
 		x = tempX;
 		y = tempY;
 	}
 	private void checkTileMapCollision() 
 	{
-		currentColl = (int)x / map.getTileWidth();
+		currentColl = (int)x /  map.getTileWidth();
 		currentRow  = (int)y / map.getTileHeight();
-
-		nextX = x + dx;
-		nextY = y + dy;
 		
 		tempX = x;
 		tempY = y;
@@ -84,7 +98,7 @@ public abstract class GameObject
 			if(topLeft || topRight)
 			{
 				dy = 0;
-				tempY = currentRow + map.getTileHeight() + collusionHeight / 2;
+				tempY = currentRow * map.getTileHeight() + collusionHeight / 2;
 			}
 			else
 				tempY += dy;
@@ -92,7 +106,7 @@ public abstract class GameObject
 			if(bottomLeft || bottomRight)
 			{
 				dy = 0;
-				tempY = (currentColl + 1) * map.getTileHeight() - collusionHeight / 2;
+				tempY = (currentRow + 1) * map.getTileHeight() - collusionHeight / 2;
 			}
 			else
 				tempY += dy;
@@ -103,6 +117,7 @@ public abstract class GameObject
 			if(topLeft || bottomLeft)
 			{
 				dx = 0;
+				ddx = 0;
 				tempX = currentColl * map.getTileWidth() + collusionWidth / 2;
 			}
 			else
@@ -111,6 +126,7 @@ public abstract class GameObject
 			if(topRight || bottomRight)
 			{
 				dx = 0;
+				ddx = 0;
 				tempX = (currentColl + 1) * map.getTileWidth() - (collusionWidth / 2);
 			}
 			else
@@ -132,6 +148,7 @@ public abstract class GameObject
 		topRight = map.isBlocked(rightTile, topTile);
 		bottomLeft = map.isBlocked(leftTile, bottomTile);
 		bottomRight = map.isBlocked(rightTile, bottomTile);
+		
 	}
 	public Rectangle getRectangle()
 	{

@@ -2,9 +2,7 @@ package collony.tileMap;
 
 import collony.gamestate.test.Player;
 import collony.main.Game;
-import collony.util.GIP;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -58,8 +56,8 @@ public class OrthogonalTileMap
 	public void update(float dt)
 	{
 		player.update(dt);
-		//camera.position.x = player.getX() - Game.WIDTH / 2;
-		//camera.position.y = player.getY() - Game.HEIGHT / 2;
+		camera.position.x +=( player.getX() - camera.position.x) * 3 * dt;
+		camera.position.y +=( player.getY() - camera.position.y) * 3 * dt;
 		
 		camera.update();
 		renderer.setView(camera);
@@ -87,17 +85,15 @@ public class OrthogonalTileMap
 		return cell.getTile().
 				getProperties().containsKey(property);
 	}
-	public Object getProperty(int x , int y ,String property)
+	public<T> T getProperty(int x , int y ,String property , Class<T> clss)
 	{
-		Cell cell = ((TiledMapTileLayer)tiledMap.getLayers().get("Layer1")).getCell(x, y);
-		if(cell == null)
-			return false;
-		return cell.getTile().
-				getProperties().get(property);
+		return ((TiledMapTileLayer)tiledMap.getLayers().get("Layer1"))
+				.getCell(x, y).getTile().
+				getProperties().get(property , clss);
 	}
 	public boolean isBlocked(int x , int y)
 	{
-		return hasProperty(x, y, "blocked") && ((Integer)getProperty(x, y, "blocked") == 1);
+		return hasProperty(x, y, "blocked") && (Integer.parseInt(getProperty(x, y, "blocked" , String.class)) == 1);
 	}
 	public int getTileWidth()
 	{
@@ -106,5 +102,19 @@ public class OrthogonalTileMap
 	public int getTileHeight()
 	{
 		return tileHeight;
+	}
+	/**
+	 * [Tiles]
+	 * */
+	public int getWidth()
+	{
+		return mapWidth;
+	}
+	/**
+	 * [Tiles]
+	 * */
+	public int getHeight()
+	{
+		return mapHeight;
 	}
 }

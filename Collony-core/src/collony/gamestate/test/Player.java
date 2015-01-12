@@ -15,35 +15,38 @@ public class Player extends GameObject
 	public Player(OrthogonalTileMap map) 
 	{
 		super(map);
-		tex = new Texture(Gdx.files.internal("maps/map1/redball.png"));
+		tex = new Texture(Gdx.files.internal("maps/map1/player.jpg"));
 		width = 32;
 		height = 32;
 		collusionHeight = 32;
 		collusionWidth = 32;
 		y = 250;
 		x = 30;
+		maxSpeed = 3;
 	}
 	
 	@Override
 	public void update(float dt) 
 	{
-		if(GIP.isDown(Input.Keys.W))
-			dy = 2;
+		if(GIP.isDown(Input.Keys.UP))
+			ddy = 100;
+		else if(GIP.isDown(Input.Keys.DOWN))
+			ddy = -100;
 		else
-			dy = 0;
-		if(GIP.isDown(Input.Keys.S))
-			dy = -2;
-		else
-			dy = 0;
-		if(GIP.isDown(Input.Keys.A))
-			dx = -2;
-		else
-			dx = 0;
-		if(GIP.isDown(Input.Keys.D))
-			dx = 2;
+		{
+			ddy = 0;
+			dy *= 0.8F;
+		}
+		
+		if(GIP.isDown(Input.Keys.LEFT))
+			ddx = -100;
+		else if(GIP.isDown(Input.Keys.RIGHT))
+			ddx = 100;
 		else 
-			dx = 0;
-			
+		{
+			ddx = 0;
+			dx *= 0.8F;
+		}
 		
 		super.update(dt);
 	}
