@@ -1,13 +1,16 @@
 package collony.gamestate.mainMenu;
 
-import collony.gamestate.*;
+import collony.gamestate.GameState;
+import collony.gamestate.GameStateManager;
 import collony.gamestate.GameStateManager.STATES;
 import collony.main.Game;
 import collony.util.GIP;
+import collony.util.SoundBox;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -24,6 +27,8 @@ public class MenuState extends GameState
 	private String[] menuItems;
 	private int currentItem;
 	
+	private Texture bg;
+	
 	public MenuState(GameStateManager gsm)
 	{
 		super(gsm);
@@ -35,14 +40,14 @@ public class MenuState extends GameState
 	public void init()
 	{
 		FreeTypeFontGenerator ftfg = new FreeTypeFontGenerator(
-				Gdx.files.internal("fonts/28_Days_Later_Cyr.ttf")
+				Gdx.files.internal("menustate/28_Days_Later_Cyr.ttf")
 				);
 		
 		titleFont = ftfg.generateFont(64);
 		titleFont.setColor(0.9f, 0.0f, 0.0f, 0.8f);
 		ftfg.dispose();
 		
-		ftfg = new FreeTypeFontGenerator(Gdx.files.internal("fonts/a_Albionic.ttf"));
+		ftfg = new FreeTypeFontGenerator(Gdx.files.internal("menustate/a_Albionic.ttf"));
 		font = ftfg.generateFont(32);
 		ftfg.dispose();
 		
@@ -54,6 +59,8 @@ public class MenuState extends GameState
 		cam = new OrthographicCamera(Game.WIDTH, Game.HEIGHT);
 		cam.setToOrtho(false, Game.WIDTH, Game.HEIGHT);
 		cam.update();
+		
+		bg = new Texture(Gdx.files.internal("menustate/bg.jpg"));
 	}
 
 	@Override
@@ -61,18 +68,22 @@ public class MenuState extends GameState
 	{
 		if(GIP.isPressed(Input.Keys.UP))
 		{
+			SoundBox.play("menubut");
+			
 			currentItem--;
 			if(currentItem < 0)
 				currentItem = menuItems.length - 1;
 		}
 		if(GIP.isPressed(Input.Keys.DOWN))
 		{
+			SoundBox.play("menubut");
 			currentItem++;
 			if(currentItem > menuItems.length - 1)
 				currentItem = 0;
 		}
 		if(GIP.isPressed(Input.Keys.ENTER))
 		{
+			SoundBox.play("select");
 			switch(currentItem)
 			{
 			case 0:
@@ -101,6 +112,7 @@ public class MenuState extends GameState
 		
 		sb.begin();
 		
+			sb.draw(bg, 0, 0);
 			float titlewidth = titleFont.getBounds(title).width;
 			titleFont.draw(sb, title, (Game.WIDTH - titlewidth)/2, Game.HEIGHT - 100);
 			
@@ -120,6 +132,7 @@ public class MenuState extends GameState
 	@Override
 	public void dispose() 
 	{
+		bg.dispose();
 		sb.dispose();
 		titleFont.dispose();
 		font.dispose();

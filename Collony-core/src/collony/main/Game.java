@@ -2,6 +2,7 @@ package collony.main;
 
 import collony.gamestate.GameStateManager;
 import collony.util.GIP;
+import collony.util.SoundBox;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -22,7 +23,10 @@ public class Game implements ApplicationListener
 		
 		gsm = new GameStateManager();
 		Gdx.input.setInputProcessor(new GIP());
+		SoundBox.put("menubut", Gdx.audio.newSound(Gdx.files.internal("menustate/button.mp3")));
+		SoundBox.put("select", Gdx.audio.newSound(Gdx.files.internal("menustate/button1.mp3")));
 	}
+
 
 	@Override
 	public void resize(int width, int height) 
@@ -57,7 +61,7 @@ public class Game implements ApplicationListener
 	@Override
 	public void dispose()
 	{
-			
+		
 	}
 
 }
