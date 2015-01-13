@@ -47,8 +47,6 @@ public class OrthogonalTileMap
 		player = new Player(this);
 		
 		renderer.setView(camera);
-		
-		System.out.println(isBlocked(7, 0));
 	}
 	
 	
@@ -56,8 +54,8 @@ public class OrthogonalTileMap
 	public void update(float dt)
 	{
 		player.update(dt);
-		camera.position.x +=( player.getX() - camera.position.x) * 3 * dt;
-		camera.position.y +=( player.getY() - camera.position.y) * 3 * dt;
+		camera.position.x += (player.getX() - camera.position.x) * 3 * dt;
+		camera.position.y += (player.getY() - camera.position.y) * 3 * dt;
 		
 		camera.update();
 		renderer.setView(camera);
@@ -105,13 +103,13 @@ public class OrthogonalTileMap
 	}
 	/**
 	 * [Tiles]
-	 * */
+	 **/
 	public int getWidth()
 	{
 		return mapWidth;
 	}
 	/**
-	 * [Tiles]
+	 * [<b>Tiles</b>]
 	 * */
 	public int getHeight()
 	{
