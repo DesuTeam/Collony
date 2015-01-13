@@ -1,9 +1,12 @@
 package collony.gamestate.test;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 
 import collony.gamestate.*;
+import collony.gamestate.GameStateManager.STATES;
 import collony.tileMap.OrthogonalTileMap;
+import collony.util.GIP;
 
 public class TestState extends GameState
 {
@@ -27,6 +30,8 @@ public class TestState extends GameState
 	public void update(float dt)
 	{
 		tileMap.update(dt);
+		if(GIP.isPressed(Input.Keys.ESCAPE))
+			gsm.setState(STATES.MENU);
 	}
 
 	@Override

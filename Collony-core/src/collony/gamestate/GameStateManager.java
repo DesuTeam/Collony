@@ -16,7 +16,6 @@ public class GameStateManager
 	public enum STATES
 	{
 		MENU,
-		PLAY,
 		TEST
 	};
 
@@ -31,22 +30,7 @@ public class GameStateManager
 	
 	public void setState(STATES state)
 	{
-		if (gameState != null)
-			gameState.dispose();
-		
-		if(state == STATES.MENU)
-		{
-			gameState = states.get(STATES.MENU);
-		}
-		
-		if(state == STATES.PLAY)
-		{
-			//gameState = states.get(STATES.PLAY);
-		}
-		if(state == STATES.TEST)
-		{
-			gameState = states.get(STATES.TEST);
-		}
+		gameState = states.get(state);
 	}
 	
 	public void update(float dt)
