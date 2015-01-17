@@ -81,9 +81,14 @@ public class GIP implements InputProcessor
 	{
 		return isDown(key) && preccedKeys.get(key);
 	}
+	
 	public static boolean isDown(int key)
 	{
 		return preccedKeys.containsKey(key);
 	}
-
+	
+	public static void toggle(int key)
+	{
+		preccedKeys.replace(key, !preccedKeys.get(key));
+	}
 }
