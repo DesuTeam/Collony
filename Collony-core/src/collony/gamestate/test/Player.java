@@ -36,7 +36,7 @@ public class Player extends GameObject
 			if (GIP.isPressed(Input.Keys.E))
 			{
 				invent.visible = true;
-				GIP.toggle(Input.Keys.E);
+				GIP.updateKey(Input.Keys.E);
 			}
 			
 			if(GIP.isDown(Input.Keys.UP))

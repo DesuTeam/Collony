@@ -39,6 +39,7 @@ public class Inventory
 	public void render(SpriteBatch sb)
 	{
 		Gdx.gl.glEnable(GL20.GL_BLEND);
+		
 		shr.begin(ShapeType.Filled);
 		shr.setColor(0.0f, 0.0f, 0.0f, 0.7f);
 		shr.rect(Game.WIDTH/2.0f, 0.0f, Game.WIDTH/2.0f, Game.HEIGHT);
@@ -104,7 +105,7 @@ public class Inventory
 			{
 				System.out.println("HERE");
 				visible = false;
-				GIP.toggle(Input.Keys.E);
+				GIP.updateKey(Input.Keys.E);
 			}
 		}
 		return visible;

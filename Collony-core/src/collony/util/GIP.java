@@ -87,8 +87,8 @@ public class GIP implements InputProcessor
 		return preccedKeys.containsKey(key);
 	}
 	
-	public static void toggle(int key)
+	public static void updateKey(int key)
 	{
-		preccedKeys.replace(key, !preccedKeys.get(key));
+		preccedKeys.replace(key, false);
 	}
 }
