@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import collony.gamestate.mainMenu.MenuState;
+import collony.gamestate.test.Intro;
 import collony.gamestate.test.TestState;
 
 public class GameStateManager 
@@ -16,16 +17,18 @@ public class GameStateManager
 	public enum STATES
 	{
 		MENU,
-		TEST
+		TEST,
+		INTRO
 	};
 
 	public GameStateManager() 
 	{
 		states = new HashMap<STATES, GameState>();
 		states.put(STATES.MENU, new MenuState(this));
+		states.put(STATES.INTRO, new Intro(this));
 		states.put(STATES.TEST, new TestState(this));
 		
-		setState(STATES.MENU);
+		setState(STATES.INTRO);
 	}
 	
 	public void setState(STATES state)
